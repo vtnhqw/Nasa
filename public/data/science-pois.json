@@ -1,0 +1,41 @@
+[
+  {
+    "id": "jezero-sol-13",
+    "name": "Octavia E. Butler Landing",
+    "mission": "Mars 2020 / Perseverance",
+    "lat": 18.44462715,
+    "lon": 77.45088572,
+    "sol": 13,
+    "sourceUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+    "objective": "Compare rover-observed surface textures with orbital terrain to investigate Jezero\u2019s ancient environmental history. This is a verified rover stop, not a newly asserted geological deposit.",
+    "uncertainty": "NASA JPL rover localization; positional uncertainty not supplied in this feed. No claim of astronaut traversability.",
+    "imageUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/mosaics/N_LRGB_0012XRAS_0030000_CYL_S_AUTOGENJ01.jpg",
+    "category": "observed"
+  },
+  {
+    "id": "jezero-sol-180",
+    "name": "Perseverance Sol 180 stop",
+    "mission": "Mars 2020 / Perseverance",
+    "lat": 18.4307394,
+    "lon": 77.44436574,
+    "sol": 180,
+    "sourceUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+    "objective": "Compare rover-observed surface textures with orbital terrain to investigate Jezero\u2019s ancient environmental history. This is a verified rover stop, not a newly asserted geological deposit.",
+    "uncertainty": "NASA JPL rover localization; positional uncertainty not supplied in this feed. No claim of astronaut traversability.",
+    "imageUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/mosaics/N_LRGB_0180_RAS_0070000_CYL_S_AUTOGENJ01.jpg",
+    "category": "observed"
+  },
+  {
+    "id": "jezero-sol-420",
+    "name": "Perseverance Sol 420 stop",
+    "mission": "Mars 2020 / Perseverance",
+    "lat": 18.44982498,
+    "lon": 77.40136318,
+    "sol": 420,
+    "sourceUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+    "objective": "Compare rover-observed surface textures with orbital terrain to investigate Jezero\u2019s ancient environmental history. This is a verified rover stop, not a newly asserted geological deposit.",
+    "uncertainty": "NASA JPL rover localization; positional uncertainty not supplied in this feed. No claim of astronaut traversability.",
+    "imageUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/mosaics/N_LRGB_0420_RAS_0232872_CYL_S_AUTOGENJ02.jpg",
+    "category": "observed"
+  }
+]

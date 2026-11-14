@@ -1,0 +1,18 @@
+{
+  "asset": "/textures/jezero-ctx.webp",
+  "bounds": {
+    "west": 77.34375,
+    "east": 77.607421875,
+    "north": 18.544921875,
+    "south": 18.3251953125
+  },
+  "width": 1536,
+  "height": 1280,
+  "sourceUrl": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/WMTSCapabilities.xml",
+  "category": "observed",
+  "resolution": "WMTS level 12, approximately 10 m/pixel; source CTX mosaic 6 m/pixel",
+  "limitations": [
+    "Optical image only: no local high-resolution elevation imported.",
+    "Does not establish walkability or identify all obstacles."
+  ]
+}

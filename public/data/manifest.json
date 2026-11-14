@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "generatedDate": "2026-11-15",
+  "coordinateConvention": "Planetocentric latitude; east-positive longitude. Display imagery -180..180; raw MOLA 0..360.",
+  "datasets": [
+    {
+      "id": "imagery",
+      "sourceName": "Viking VIS Global Color Mosaic",
+      "agency": "NASA / JPL / USGS",
+      "mission": "Viking 1 and 2",
+      "instrument": "VIS",
+      "productName": "Mars_Viking_MDIM21_ClrMosaic_global_232m",
+      "asset": "/textures/mars-globe.webp",
+      "sourceUrl": "https://trek.nasa.gov/tiles/Mars/EQ/Mars_Viking_MDIM21_ClrMosaic_global_232m/1.0.0/WMTSCapabilities.xml",
+      "resolution": "2048 \u00d7 1024 overview, 0.17578125\u00b0/pixel; source mosaic 232 m/pixel",
+      "units": "rendered RGB imagery",
+      "category": "observed",
+      "processingMethod": "32 level-2 WMTS tiles stitched in row/column order; WebP quality 90; no synthetic fill.",
+      "limitations": [
+        "Color composite, not calibrated reflectance.",
+        "Overview is too coarse to identify local obstacles."
+      ],
+      "status": "installed",
+      "installed": true,
+      "downloadDate": "2026-11-15",
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement.",
+      "bytes": 644258,
+      "sha256": "85c8bfa3d0aa83611d7eb133d616f18540deb3d6babea810a2aee74a498c1fad"
+    },
+    {
+      "id": "mola",
+      "sourceName": "MGS MOLA MEGDR",
+      "agency": "NASA / GSFC / PDS",
+      "mission": "Mars Global Surveyor",
+      "instrument": "MOLA",
+      "productName": "MEGT90N000CB.IMG v2.0",
+      "asset": "/data/mola/elevation.i16",
+      "sourceUrl": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
+      "downloadUrl": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg004/megt90n000cb.img",
+      "resolution": "0.25\u00b0 (4 pixels/degree), approximately 14.8 km north\u2013south",
+      "units": "m above GMM3 mgm1025 areoid (degree/order 50)",
+      "category": "observed",
+      "observationPeriod": "1997-09-15 to 2001-06-30",
+      "processingMethod": "MSB signed int16 converted losslessly to little-endian; no resampling.",
+      "limitations": [
+        "Source product includes interpolation where no shots fall in a cell.",
+        "Frontend interpolation and slope are derived; not individual MOLA shots.",
+        "Not suitable for local walkability assessment."
+      ],
+      "status": "installed",
+      "installed": true,
+      "downloadDate": "2026-11-15",
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement.",
+      "bytes": 2073600,
+      "sha256": "fde054706d2fd9bd868633edcfc0fa99d7377b16098505a61cd84b8812f4524e"
+    },
+    {
+      "id": "jezero",
+      "sourceName": "MRO CTX controlled Jezero mosaic",
+      "agency": "NASA / JPL / USGS",
+      "mission": "Mars Reconnaissance Orbiter",
+      "instrument": "CTX",
+      "productName": "JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0",
+      "asset": "/textures/jezero-ctx.webp",
+      "sourceUrl": "https://trek.nasa.gov/tiles/Mars/EQ/JEZ_ctx_B_soc_008_orthoMosaic_6m_Eqc_latTs0_lon0/1.0.0/WMTSCapabilities.xml",
+      "resolution": "approximately 10 m/pixel overview from 6 m/pixel source",
+      "units": "rendered optical intensity",
+      "category": "observed",
+      "processingMethod": "Thirty level-12 WMTS tiles stitched with unchanged bounds.",
+      "limitations": [
+        "Optical imagery alone does not establish astronaut traversability.",
+        "Local high-resolution DEM not installed."
+      ],
+      "status": "installed",
+      "installed": true,
+      "downloadDate": "2026-11-15",
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement.",
+      "bytes": 315354,
+      "sha256": "77b568f957c0af60d557fbb025838847c86a57ae1e2a8f7592598af8c7f8b96a"
+    },
+    {
+      "id": "thermal",
+      "sourceName": "MGS TES Global Thermal Inertia",
+      "agency": "NASA / JPL / ASU",
+      "mission": "Mars Global Surveyor",
+      "instrument": "TES",
+      "productName": "TES_Thermal_Inertia; Putzig et al. 2005",
+      "asset": "/textures/tes-thermal-inertia.webp",
+      "sourceUrl": "https://trek.nasa.gov/tiles/Mars/EQ/TES_Thermal_Inertia/1.0.0/WMTSCapabilities.xml",
+      "resolution": "1024 \u00d7 512 display overview (0.3515625\u00b0/pixel); original product 20 ppd (~3 km)",
+      "units": "rendered thermal-inertia context; scalar values not imported",
+      "category": "derived",
+      "processingMethod": "Eight level-1 NASA rendered tiles stitched losslessly, preserving transparency. Product thermal inertia is itself inferred from TES observations.",
+      "limitations": [
+        "Not a temperature map or weather forecast.",
+        "Display colors are not decoded to physical values.",
+        "Overview only; not useful for local route decisions within Jezero.",
+        "No site-specific thermal hazard or heating demand inferred."
+      ],
+      "status": "installed",
+      "installed": true,
+      "downloadDate": "2026-11-15",
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement.",
+      "bytes": 774790,
+      "sha256": "609ec4a102212b9757ca2ba18300c127313cd610f7571958c119d84984807a58"
+    },
+    {
+      "id": "waypoints",
+      "sourceName": "NASA JPL Perseverance rover localization",
+      "agency": "NASA / JPL-Caltech",
+      "mission": "Mars 2020",
+      "instrument": "rover localization",
+      "productName": "M20_waypoints.json snapshot; selected sols 13, 180, 420",
+      "asset": "/data/science-pois.json",
+      "sourceUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json",
+      "resolution": "Waypoint coordinates; uncertainty not supplied",
+      "units": "planetocentric degrees east/north",
+      "category": "observed",
+      "processingMethod": "Selected exact source waypoint coordinates; no geology assigned beyond verified rover stops.",
+      "limitations": [
+        "Not live rover positions.",
+        "Rover traverse is not a certified astronaut route.",
+        "Linked panorama availability depends on NASA server; retrieval returned HTTP 403."
+      ],
+      "status": "installed",
+      "installed": true,
+      "downloadDate": "2026-11-15",
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement.",
+      "bytes": 2303,
+      "sha256": "5d6409fe172771d221b95d4e395294b58132df1b0a5ba2145d36df427eb19a06"
+    },
+    {
+      "id": "ice",
+      "sourceName": "SWIM4MIM",
+      "agency": "NASA-supported PSI project",
+      "sourceUrl": "https://swim.psi.edu/SWIM4MIMProducts.php",
+      "units": "ice consistency",
+      "category": "derived",
+      "limitations": [
+        "Download origin returned HTTP 523; no local georeferenced ice raster.",
+        "Extractability is not established."
+      ],
+      "status": "unavailable",
+      "installed": false,
+      "downloadDate": null,
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement."
+    },
+    {
+      "id": "temperature",
+      "sourceName": "NASA planetary atmospheric archives",
+      "agency": "NASA",
+      "sourceUrl": "https://pds-atmospheres.nmsu.edu/",
+      "units": "K",
+      "category": "observed",
+      "limitations": [
+        "No validated temperature observations imported."
+      ],
+      "status": "unavailable",
+      "installed": false,
+      "downloadDate": null,
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement."
+    },
+    {
+      "id": "radiation",
+      "sourceName": "Curiosity RAD",
+      "agency": "NASA",
+      "sourceUrl": "https://science.nasa.gov/mission/msl-curiosity/science/instruments/rad/",
+      "units": "mSv",
+      "category": "observed",
+      "limitations": [
+        "No local radiation dataset or dose model installed.",
+        "RAD observations at Gale must not be mapped globally."
+      ],
+      "status": "unavailable",
+      "installed": false,
+      "downloadDate": null,
+      "licenseOrUsageTerms": "Credit original agency and instrument teams; NASA media usage guidelines apply; no NASA endorsement."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+import {Component,Suspense,useEffect,useMemo,useRef,useState,type ReactNode} from 'react';
+import {Canvas,useThree} from '@react-three/fiber';
+import {OrbitControls,useTexture,Line} from '@react-three/drei';
+import {SRGBColorSpace,Vector3} from 'three';
+import {Compass,Globe2,Map,Minus,Plus,RotateCw,Focus} from 'lucide-react';
+import type {Site,Location} from '../types';
+import {toVector,fromVector,normalizeLon} from '../lib/geo';
+import {coords} from '../lib/data';
+import {useMission} from '../store/useMission';
+class GlobeBoundary extends Component<{children:ReactNode;fallback:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return {failed:true}}render(){return this.state.failed?this.props.fallback:this.props.children}}
+function CameraFocus({location,zoom}:{location:Location;zoom:number}){const {camera}=useThree();useEffect(()=>{camera.position.copy(new Vector3(...toVector(location,zoom)));camera.lookAt(0,0,0)},[location.lat,location.lon,zoom,camera]);return null}
+function Planet({sites,route,texture}:{sites:Site[];route:Location[];texture:string}){
+ const map=useTexture(texture);map.colorSpace=SRGBColorSpace;
+ const {selected,select,autoRotate,set}=useMission();
+ const [hover,setHover]=useState(false);
+ return <><ambientLight intensity={1.5}/><directionalLight position={[4,3,5]} intensity={2.2}/><mesh onPointerOver={()=>setHover(true)} onPointerOut={()=>setHover(false)} onClick={e=>{if(e.delta>5)return;e.stopPropagation();select(fromVector(e.point.toArray()))}}><sphereGeometry args={[1,96,64]}/><meshStandardMaterial map={map} roughness={1}/></mesh><mesh scale={1.012}><sphereGeometry args={[1,64,32]}/><meshBasicMaterial color="#e8a27a" transparent opacity={.035} wireframe={false}/></mesh>{sites.map(s=><mesh key={s.id} position={toVector(s,1.012)} onClick={e=>{e.stopPropagation();select(s);set({targetId:s.id})}}><sphereGeometry args={[.009,12,12]}/><meshBasicMaterial color="#9ce9df"/></mesh>)}<mesh position={toVector(selected,1.022)}><sphereGeometry args={[.017,16,16]}/><meshBasicMaterial color="#ff9d63"/></mesh>{route.length>1&&<Line points={route.map(p=>toVector(p,1.018))} color="#ffd3a3" lineWidth={2}/>}<OrbitControls enablePan={false} minDistance={1.25} maxDistance={5} autoRotate={autoRotate&&!hover} autoRotateSpeed={.3} enableDamping/></>;
+}
+export function MapView({sites,route,textureAvailable=true,localImage}:{sites:Site[];route:Location[];textureAvailable?:boolean;localImage?:{asset:string;west:number;east:number;north:number;south:number}}){
+ const {view,set,selected,select,pick,layer,opacity,autoRotate,targetId}=useMission();const [zoom,setZoom]=useState(1),[globeZoom,setGlobeZoom]=useState(2.8),[center,setCenter]=useState(selected),[focus,setFocus]=useState(selected);
+ const [hover,setHover]=useState<Location|null>(null);const svg=useRef<SVGSVGElement>(null);
+ useEffect(()=>{if(targetId?.startsWith('jezero-sol-')){setCenter(selected);setZoom(1400);setFocus(selected)}},[targetId]);
+ const width=360/zoom,height=180/zoom;
+ const box=zoom===1?{x:0,y:0,w:360,h:180}:{x:Math.max(0,Math.min(360-width,normalizeLon(center.lon)+180-width/2)),y:Math.max(0,Math.min(180-height,90-center.lat-height/2)),w:width,h:height};
+ function svgPoint(e:React.MouseEvent<SVGSVGElement>){const el=svg.current;if(!el)return selected;const matrix=el.getScreenCTM();if(!matrix)return selected;const point=new DOMPoint(e.clientX,e.clientY).matrixTransform(matrix.inverse());return {lat:Math.max(-90,Math.min(90,90-point.y)),lon:normalizeLon(point.x-180)}}
+ const routeSegments=useMemo(()=>{const segments:Location[][]=[[]];route.forEach((p,i)=>{if(i&&Math.abs(p.lon-route[i-1].lon)>180)segments.push([]);segments[segments.length-1].push(p)});return segments},[route]);
+ const imageError=<div className="map-unavailable">NASA imagery unavailable.<br/>Use coordinates or mission targets to select a location.</div>;
+ return <section className={`map-stage ${view}`} aria-label="Interactive Mars map">
+ <div className="map-top"><span className="eyebrow"><span className="live-dot"/> MARS · {view==='globe'?'ORBITAL VIEW':'SURFACE ATLAS'}</span><div className="segmented"><button className={view==='globe'?'active':''} onClick={()=>set({view:'globe'})}><Globe2 size={14}/> Globe</button><button className={view==='map'?'active':''} onClick={()=>{setCenter(selected);set({view:'map'})}}><Map size={14}/> Unfold Mars</button></div></div>
+ {pick!=='inspect'&&<div className="pick-banner">Select route {pick} on the surface</div>}
+ {view==='globe'?<div className="globe-canvas">{textureAvailable?<GlobeBoundary fallback={<div className="map-unavailable">3D view unavailable.<button onClick={()=>set({view:'map'})}>Open flat map</button></div>}><Canvas camera={{position:toVector(selected,2.8),fov:42}} dpr={[1,1.7]} gl={{antialias:true}}><Suspense fallback={null}><CameraFocus location={focus} zoom={globeZoom}/><Planet sites={sites} route={route} texture="/textures/mars-globe.webp"/></Suspense></Canvas></GlobeBoundary>:imageError}</div>:<div className="flat-container"><svg ref={svg} role="img" aria-label="Equirectangular Mars surface map. Use coordinate inputs for keyboard selection." viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`} onPointerMove={e=>setHover(svgPoint(e))} onPointerLeave={()=>setHover(null)} onClick={e=>select(svgPoint(e))}>
+ <rect width="360" height="180" fill="#181b20"/>{textureAvailable&&<image href="/textures/mars-globe.webp" width="360" height="180" preserveAspectRatio="none"/>}
+ {localImage&&<image href={localImage.asset} x={localImage.west+180} y={90-localImage.north} width={localImage.east-localImage.west} height={localImage.north-localImage.south} preserveAspectRatio="none"/>}
+ {layer==='elevation'&&<image href="/textures/mola-elevation.webp" width="360" height="180" opacity={opacity} preserveAspectRatio="none"/>}
+ {layer==='thermal'&&<image href="/textures/tes-thermal-inertia.webp" width="360" height="180" opacity={opacity} preserveAspectRatio="none"/>}
+ {zoom<5&&<g stroke="#d8e1df" strokeOpacity=".15" strokeWidth=".15">{Array.from({length:11},(_,i)=><path key={`v${i}`} d={`M${(i+1)*30} 0 V180`}/>)}{Array.from({length:5},(_,i)=><path key={`h${i}`} d={`M0 ${(i+1)*30} H360`}/>)}</g>}
+ {routeSegments.map((r,i)=><polyline key={i} points={r.map(p=>`${p.lon+180},${90-p.lat}`).join(' ')} fill="none" stroke="#ffb381" strokeWidth={.65/zoom}/>)}
+ {sites.map(s=><g key={s.id} onClick={e=>{e.stopPropagation();select(s);set({targetId:s.id})}} style={{cursor:'pointer'}}><circle cx={s.lon+180} cy={90-s.lat} r={1.5/zoom} fill="#91ded5" stroke="#102221" strokeWidth={.4/zoom}/>{zoom>10&&<text x={s.lon+180+2/zoom} y={90-s.lat} fill="#fff" fontSize={3/zoom}>{s.name}</text>}</g>)}
+ <circle cx={selected.lon+180} cy={90-selected.lat} r={2.5/zoom} fill="none" stroke="#ffb381" strokeWidth={.5/zoom}/><circle cx={selected.lon+180} cy={90-selected.lat} r={.8/zoom} fill="#fff"/>
+ </svg></div>}
+ <div className="map-decoration"><span>+ 90° N</span><span>PLANETOCENTRIC<br/>EAST-POSITIVE</span><span>− 90° S</span></div>
+ <div className="map-tools"><button title="Zoom in" aria-label="Zoom in" onClick={()=>{setCenter(selected);view==='map'?setZoom(Math.min(12000,zoom*2)):setGlobeZoom(Math.max(1.3,globeZoom-.4))}}><Plus size={18}/></button><button title="Zoom out" aria-label="Zoom out" onClick={()=>view==='map'?setZoom(Math.max(1,zoom/2)):setGlobeZoom(Math.min(5,globeZoom+.4))}><Minus size={18}/></button><button title="Focus selected region" aria-label="Focus selected region" onClick={()=>{setFocus({...selected});setCenter(selected);if(view==='map')setZoom(localImage?1400:8)}}><Focus size={18}/></button><button title="Toggle auto rotation" aria-label="Toggle auto rotation" aria-pressed={autoRotate} onClick={()=>set({autoRotate:!autoRotate})}><RotateCw size={17}/></button></div>
+ <div className="map-bottom"><span><Compass size={14}/> {coords(hover??selected)}</span><span>{view==='globe'?'DRAG TO ORBIT · SCROLL TO ZOOM':'CLICK TO SELECT · + TO ZOOM'}<small>NASA / JPL-Caltech · imagery attribution in Data Sources</small></span></div>
+ </section>
+}

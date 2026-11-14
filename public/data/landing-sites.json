@@ -1,0 +1,34 @@
+[
+  {
+    "id": "jezero",
+    "name": "Jezero Crater",
+    "mission": "Perseverance",
+    "lat": 18.44462715,
+    "lon": 77.45088572,
+    "sourceUrl": "https://mars.nasa.gov/mmgis-maps/M20/Layers/json/M20_waypoints.json"
+  },
+  {
+    "id": "gale",
+    "name": "Gale Crater",
+    "mission": "Curiosity",
+    "lat": -4.5895,
+    "lon": 137.4417,
+    "sourceUrl": "https://ntrs.nasa.gov/api/citations/20130010129/downloads/20130010129.pdf"
+  },
+  {
+    "id": "utopia",
+    "name": "Utopia Planitia",
+    "mission": "Viking 2",
+    "lat": 47.668,
+    "lon": 134.28,
+    "sourceUrl": "https://ode.rsl.wustl.edu/mars/pagehelp/Content/Missions_Instruments/Landing_Sites.htm"
+  },
+  {
+    "id": "elysium",
+    "name": "Elysium Planitia",
+    "mission": "InSight",
+    "lat": 4.502384,
+    "lon": 135.623447,
+    "sourceUrl": "https://ntrs.nasa.gov/api/citations/20200002910/downloads/20200002910.pdf"
+  }
+]

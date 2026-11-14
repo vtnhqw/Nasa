@@ -1,0 +1,30 @@
+{
+  "width": 1440,
+  "height": 720,
+  "west": 0,
+  "north": 90,
+  "step": 0.25,
+  "noData": -32768,
+  "asset": "/data/mola/elevation.i16",
+  "cellRegistration": "center",
+  "dtype": "int16-le",
+  "units": "m",
+  "category": "observed",
+  "sourceName": "MGS MOLA MEGDR 4 pixels/degree",
+  "productName": "MEGT90N000CB.IMG",
+  "version": "2.0",
+  "sourceUrl": "https://pds-geosciences.wustl.edu/missions/mgs/megdr.html",
+  "datum": "IAU2000; GMM3 (mgm1025) areoid, degree/order 50",
+  "coordinateSystem": "planetocentric latitude; east-positive longitude",
+  "resolution": "0.25 degrees; approximately 14.8 km north-south",
+  "observationPeriod": "1997-09-15 through 2001-06-30",
+  "processingMethod": "Unmodified median-topography grid; big-endian to little-endian conversion only. Source product fills unobserved bins by interpolation.",
+  "limitations": [
+    "Coarse global overview only; not suitable for operational astronaut navigation.",
+    "Median and archive-interpolated bin values, not a direct observation at each requested point.",
+    "Individual rocks and local walkability cannot be resolved."
+  ],
+  "sha256Raw": "25f16fb7aaf857898dcf98bc4f841341a24f8b9f7e98453ca083bc45d897ca2c",
+  "min": -8068,
+  "max": 21134
+}
