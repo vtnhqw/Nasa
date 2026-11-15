@@ -1,3 +1,46 @@
+## Latest UI cleanup — 2026-11-15
+
+- Clear first-click instruction and “Your location” labels on both maps.
+- Updated estimates are announced and linked from beneath the map, including on mobile.
+- Results answer How long? / Why this long? / What could help? in three distinct cards.
+- Before/after comparisons show durations, coordinates and the changed assumption; longitude-only changes explicitly explain unchanged survival. The 120-sol upper window remains labeled “at least”.
+- Removed retired walk planner, guided-walk and standalone comparison/science panels, route simulation, route state and overlays, unused geometry helpers/types, unused POI fetch, and 337 unused CSS rules. Scientific assets remain available for future data work.
+- Local changes only; no deployment. Browser visual QA remains unavailable in this session. Component tests and production build provide functional checks.
+
+# MARS SURVIVAL — current product direction
+
+## Latest user correction: survival from any Mars location
+The user explicitly rejected the walk-planning emphasis. The primary experience must be:
+1. Click any location on Mars.
+2. See how long an astronaut with the chosen shelter/resources can survive in the model.
+3. Explain the first resource or power constraint.
+4. Compare alternative locations and explain whether their modeled duration improves.
+
+No automatic walking route, rover-destination wizard or primary “Start planning a walk” action. Keep navigation visible and simple, including on mobile.
+
+## Implemented now
+- Survival map is the home screen. A result appears after a map selection or coordinate submission.
+- One astronaut by default, with configurable equipment, season, dust and resources.
+- Completed sols and first failed sol are distinguished; 120 sols is a simulation horizon, not maximum lifespan.
+- Cause explanation, power balance and end reserves update with the selected point.
+- Alternative starting sites at ±1°, ±5°, ±15°, ±30° latitude are compared with identical starting resources. Only strictly better modeled durations receive a preview action.
+- Navigation has visible Survival map and Data & limitations buttons. Settings and selected pin persist across these tabs.
+- Existing detailed timeline is available below the main result using the same settings.
+- 33 unit/component tests passed. Production build passed; browser visual verification remains pending.
+
+## Scientific limits that must remain explicit
+The current location-dependent variable is solar geometry from latitude and a fixed chosen season. Longitude does not affect survival. Elevation is contextual and is not used to fabricate temperature or radiation effects. Local temperature, extractable ice and radiation data are not integrated. Heating remains an input, no ice extraction occurs, and no radiation dose is modeled.
+
+The alternative-site comparison does not include travel time, travel supplies, terrain obstacles or moving the habitat. It compares static initial conditions, not a real survival-preserving relocation plan. Sites may be hundreds to thousands of kilometers away. Do not label them safe or tell users to move there operationally. More rigorous travel-aware relocation is future work.
+
+## Hosting preference
+LOCAL ONLY. The user cancelled OpenAI hosting. Do not publish or recreate a Sites deployment without a new explicit request. The old online copy was not deleted because the connector offers no delete/unpublish operation. See docs/RETIRED_HOSTING.md.
+
+## Deferred work
+Browser QA, local temperature/ice/radiation observations, high-resolution terrain, travel-aware relocation, and independent model/scientific review. Further dataset research remains deferred by the user.
+
+## Historical notes — superseded where they conflict with the direction above
+
 # LOCAL-ONLY — USER HOSTING PREFERENCE
 
 OpenAI hosting was cancelled by the user. Do not publish or recreate a Sites deployment. Local configuration removed; the existing remote copy has NOT been deleted because the connector lacks a deletion tool. See docs/RETIRED_HOSTING.md.
@@ -62,3 +105,12 @@ Fill team, repository, deployed URL and public demo fields in SUBMISSION.md. Fol
 - Custom habitat edits are labeled as custom. Zero-distance routes warn that another destination is needed.
 - Regression coverage includes starter mission, reset, briefing, tab navigation, fractional crew and clearing inputs.
 - Visual verification is still pending because browser control was previously denied. No claim of complete operational readiness; unavailable datasets remain deferred.
+
+## Beginner interface update
+- Home has one primary action: Start planning a walk.
+- Planning is a real three-screen flow: choose a destination, check supplies, calculate/read results.
+- No preset destination or automatically drawn route on entry.
+- Four main supply fields; advanced assumptions hidden until requested.
+- Plain-language results distinguish time/oxygen/battery sufficiency from unknown terrain safety.
+- Readable .txt download; maps and technical charts are optional expandable sections.
+- Local-only change. No deployment to the retired OpenAI host. 28 tests and TypeScript/production build pass; browser visual QA remains pending.

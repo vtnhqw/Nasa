@@ -1,5 +1,0 @@
-import {it,expect} from 'vitest';
-import {assessRoute,DEFAULT_EVA} from '../src/lib/route';
-it('calculates short mission, includes science time and crew consumables',()=>{const r=assessRoute([{lat:0,lon:0},{lat:0,lon:.01}],null,DEFAULT_EVA);expect(r.distanceKm).toBeCloseTo(.59158,4);expect(r.durationHours).toBeGreaterThan(DEFAULT_EVA.scienceHours);expect(r.oxygenKg).toBeCloseTo(r.durationHours*DEFAULT_EVA.crew*DEFAULT_EVA.oxygenKgPerHour);expect(r.ascentM).toBeNull();expect(r.warnings.join(' ')).toContain('unavailable')});
-it('warns for exhausted reserves and accounts for intermediate waypoint',()=>{const a={lat:0,lon:0},b={lat:0,lon:.01},c={lat:.01,lon:.005};const direct=assessRoute([a,b],null,DEFAULT_EVA),via=assessRoute([a,c,b],null,{...DEFAULT_EVA,oxygenKg:.001});expect(via.distanceKm).toBeGreaterThan(direct.distanceKm);expect(via.warnings.join(' ')).toContain('oxygen');expect(via.remainingOxygenKg).toBeLessThan(0)});
-it('rejects invalid speed instead of returning infinite travel time',()=>expect(()=>assessRoute([{lat:0,lon:0},{lat:1,lon:1}],null,{...DEFAULT_EVA,speedKmh:0})).toThrow());

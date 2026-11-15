@@ -1,7 +1,7 @@
 # MARS SURVIVAL
 **Explore. Navigate. Survive.**
 
-An educational Marswalk mission-planning website for the user-provided NASA Space Apps challenge brief, “Interplanetary Survival Guide: Martian Map”. Globe exploration, a localized Jezero map and a deterministic habitat simulator share planetary coordinates. See [PROJECT.md](PROJECT.md) for progress, pending QA and deferred data work.
+An educational Mars location and survival-model website for the user-provided NASA Space Apps challenge brief, “Interplanetary Survival Guide: Martian Map”. Globe exploration, a localized Jezero map and a deterministic habitat simulator share planetary coordinates. See [PROJECT.md](PROJECT.md) for progress, pending QA and deferred data work.
 
 ## Run
 Requires Node.js 20.19+ or 22.12+ (developed with Node 24).
@@ -20,12 +20,13 @@ npm run preview
 ```
 
 ## Use
-1. Explore the globe or unfold the flat map. Select coordinates with the map or keyboard-accessible coordinate fields.
-2. Pick a verified Jezero rover stop. This fills a destination and selects the landing location as the default start.
-3. Adjust route start, optional waypoint, destination and EVA assumptions.
-4. Read the elevation profile, resource calculation and uncertainty warnings. Open/export the mission briefing.
-5. Visit Habitat Survival to change kits, simulate a hypothetical storm and scrub the sol timeline.
-6. Compare sites or inspect original data sources.
+1. Open the local website and click any point on the Mars globe or flat map. Coordinate entry is also available.
+2. Read the survival estimate, why it ends, and whether another tested location lasts longer with the same setup.
+3. Change equipment, astronaut count, season or supplies to see the effect. The model assumes a pressurized shelter.
+4. If a better tested starting site exists, preview it. The comparison excludes travel costs and does not establish that relocation is possible or safe.
+5. Expand the day-by-day view to inspect resources over time. Use Data & limitations to inspect sources.
+
+The current app centers survival from arbitrary coordinates. Older walk-planning components remain in source for reference but are not the main user flow.
 
 ## Architecture
 React 19, TypeScript, Vite, React Three Fiber/Three/Drei, Zustand, Recharts and Lucide. CSS handles the responsive interface without a backend. `src/lib/geo.ts`, `route.ts` and `simulation.ts` are pure calculation modules; `src/components` contains the interface. Scientific assets ship under `public/` for static hosting. Google Fonts are optional; system fonts are fallbacks.

@@ -25,3 +25,6 @@ Energy used never exceeds energy available. Battery charge is capped; excess ene
 
 ### Failure and interpretation
 Fail on insufficient daily base power or exhausted oxygen, water or food. Resource amounts clamp to zero on failure. Depletion within a sol is not resolved; results report the first failed daily step. Heating status warns when daily solar is below base demand and becomes critical if base demand cannot be supplied. Events reflect these actual conditions. No radiation dose is accumulated. Latitude alone affects site-dependent power. Terrain/ice/radiation/temperature do not silently modify survival.
+
+## Survival-location comparison
+The home screen now defaults to one astronaut using the Small Exploration Kit. A selected pin runs the same deterministic habitat model. Completed sols exclude the first failed sol; reaching 120 sols means “at least 120 in the modeled window,” not a guaranteed maximum. Alternative sites are evaluated at ±1, ±5, ±15 and ±30 degrees latitude with unchanged longitude, omitting out-of-bounds latitudes. Candidates rank by completed sols, then distance. Only strict improvements are offered for preview. These are alternate starting-site scenarios with full original reserves, not an in-progress relocation simulation. Moving/travel costs and safety are not modeled.
