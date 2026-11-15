@@ -26,8 +26,8 @@ Global MOLA is too coarse for local obstacle avoidance or certified walkability.
 
 ## Project links
 - GitHub repository: [add]
-- Deployed website: https://mars-survival-mission-control.jauntypond131.chatgpt.site (currently owner-only)
-- Seven-slide browser deck: https://mars-survival-mission-control.jauntypond131.chatgpt.site/demo.html (currently owner-only; public sharing and visual QA pending)
+- Deployed website: [pending — OpenAI hosting cancelled by user]
+- Seven-slide browser deck: public/demo.html (local; hosting and visual QA pending)
 - Original NASA references: DATA_SOURCES.md
 
 ## AI/SI assistance disclosure

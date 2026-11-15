@@ -1,3 +1,7 @@
+# LOCAL-ONLY — USER HOSTING PREFERENCE
+
+OpenAI hosting was cancelled by the user. Do not publish or recreate a Sites deployment. Local configuration removed; the existing remote copy has NOT been deleted because the connector lacks a deletion tool. See docs/RETIRED_HOSTING.md.
+
 # MARS SURVIVAL — project status
 
 Updated 15 November 2026. Latest user decision: **finish the website first; defer further data research/integration to a later session.** Preserve existing assets. Do not spend more tokens finding datasets unless asked.

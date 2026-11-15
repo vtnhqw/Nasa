@@ -43,7 +43,7 @@ A production build produces `dist/`; no server, credentials or runtime environme
 - Netlify: build command `npm run build`, publish directory `dist` (configuration included).
 - Other static hosts: upload the contents of `dist/` and serve at the domain root.
 
-The application is deployed privately at https://mars-survival-mission-control.jauntypond131.chatgpt.site; the seven-slide demo is at /demo.html. Browser visual QA remains pending due to unavailable browser automation access.
+The project is now local-only at the user’s request. Run `npm run dev` and use the printed localhost URL. The local demo is at `/demo.html`. The former remote copy still requires deletion through the hosting service; local configuration has been removed. Browser visual QA remains pending due to unavailable browser automation access.
 
 ## Team and credits
 Team name: [add]. Members and roles: [add]. NASA/JPL/GSFC/USGS/ASU and instrument teams are credited in the manifest and source documentation. This is an independent project with no NASA endorsement. AI assistance is disclosed in [SUBMISSION.md](SUBMISSION.md).
