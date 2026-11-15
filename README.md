@@ -48,3 +48,17 @@ The project is now local-only at the user’s request. Run `npm run dev` and use
 
 ## Team and credits
 Team name: [add]. Members and roles: [add]. NASA/JPL/GSFC/USGS/ASU and instrument teams are credited in the manifest and source documentation. This is an independent project with no NASA endorsement. AI assistance is disclosed in [SUBMISSION.md](SUBMISSION.md).
+
+## GitHub Pages
+
+The `.github/workflows/pages.yml` workflow tests, builds and publishes on pushes to `main`.
+Target address: https://vtnhqw.github.io/Nasa/
+Repository Settings → Pages → Source must be **GitHub Actions** if automatic enablement is unavailable.
+Public imagery and data are resolved using Vite's deployment base, including paths inside dataset metadata.
+
+To check the same build locally:
+
+```sh
+npm run build -- --base /Nasa/
+npm run preview -- --base /Nasa/
+```

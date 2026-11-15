@@ -114,3 +114,7 @@ Fill team, repository, deployed URL and public demo fields in SUBMISSION.md. Fol
 - Plain-language results distinguish time/oxygen/battery sufficiency from unknown terrain safety.
 - Readable .txt download; maps and technical charts are optional expandable sections.
 - Local-only change. No deployment to the retired OpenAI host. 28 tests and TypeScript/production build pass; browser visual QA remains pending.
+
+## GitHub Pages deployment — 2026-11-15
+
+The user now explicitly requests GitHub Pages publication, superseding the local-only preference for this deployment. OpenAI hosting remains retired. Added an Actions deployment workflow and base-aware image/data loading for the `/Nasa/` repository path. Local validation: 26 tests pass and the Pages production build succeeds. Publication status is reported separately after checking GitHub.
