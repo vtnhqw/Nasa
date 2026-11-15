@@ -24,3 +24,18 @@ it('does not attribute a manual route destination to an unrelated science target
  fireEvent.click(screen.getByText('Mission briefing'));
  expect(screen.queryByText('Unrelated target')).toBeNull();
 });
+it('rejects fractional crew input without crashing the habitat',()=>{
+ render(<Habitat/>);
+ const field=screen.getByRole('spinbutton',{name:/Crew/});
+ fireEvent.change(field,{target:{value:'1.5'}});
+ expect(screen.getByRole('alert').textContent).toContain('whole number');
+ expect(screen.getByText('Mission resource model')).toBeTruthy();
+});
+it('allows temporarily clearing an input and restores its valid value on blur',()=>{
+ render(<Habitat/>);
+ const field=screen.getByRole('spinbutton',{name:/Initial oxygen/}) as HTMLInputElement;
+ fireEvent.change(field,{target:{value:''}});
+ expect(field.value).toBe('');
+ fireEvent.blur(field);
+ expect(field.value).toBe('100');
+});

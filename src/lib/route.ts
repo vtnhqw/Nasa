@@ -12,6 +12,7 @@ export function assessRoute(points:Location[],grid:Grid|null,c:EVA){
  const maxSlope=profile.reduce<number|null>((m,p)=>p.slope===null?m:Math.max(m??0,p.slope),null);
  const durationHours=km/(c.speedKmh/(1+c.loadKg/100))+c.scienceHours+(complete?ascent/600:0),oxygenKg=durationHours*c.crew*c.oxygenKgPerHour,energyKWh=durationHours*c.crew*c.powerKw;
  const warnings=['Preliminary route assessment — not suitable for operational astronaut navigation.'];
+ if(km<.001)warnings.push('Start and destination are the same location. Choose another destination for an excursion.');
  if(!complete)warnings.push('Scientific observation data unavailable for part of this route.');
  if(grid)warnings.push(`Elevation spacing is ${grid.step}° (~${(grid.step*Math.PI/180*3389.5).toFixed(1)} km north–south). Too coarse to evaluate rocks, cliffs or local walkability.`);
  if(maxSlope!==null&&maxSlope>15)warnings.push('High regional slope detected along the sampled route.');

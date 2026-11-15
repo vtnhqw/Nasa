@@ -42,3 +42,19 @@ Fill team, repository, deployed URL and public demo fields in SUBMISSION.md. Fol
 - Seven-slide browser presentation added at `/demo.html`, with keyboard navigation, print support and a timed 30-second playback. This is a presentation of implemented features, not a recorded browser walkthrough.
 - Browser QA/recording remain blocked: no connected browser surface; Google Chrome computer-use access was not approved on retry. Do not describe desktop/mobile visuals as verified.
 - Sites project registered; exact identity is in `.openai/hosting.json`. Check deployment result before claiming publication.
+
+## Deployment result
+- Version 1 deployed successfully: https://mars-survival-mission-control.jauntypond131.chatgpt.site
+- Seven-slide demo: https://mars-survival-mission-control.jauntypond131.chatgpt.site/demo.html
+- Access: owner-only. Automatic approval review rejected changing access to public without explicit public-sharing authorization. Do not retry based only on “continue.”
+- Verification: 24 unit/component tests pass; TypeScript and production build pass. Three.js bundle still emits a size warning.
+- Pending: desktop/mobile visual QA and browser walkthrough recording (Chrome computer use not approved). Public demo access requires explicit user approval.
+
+## UX repair pass
+- Explore and Mission Builder now have distinct purposes. Explore offers a starter mission; Mission Builder uses a three-step flow and destination selector.
+- Readable controls, larger touch targets, keyboard navigation, clearer map layers and a responsive two-column workspace replace the dense three-panel opening screen.
+- Route picking scrolls to the map and can be cancelled. The flat map supports pointer drag-pan and arrow-key panning; rotation is disabled in flat mode.
+- Fractional crew input cannot crash calculations; empty/invalid number drafts show validation and restore the last valid value on blur.
+- Custom habitat edits are labeled as custom. Zero-distance routes warn that another destination is needed.
+- Regression coverage includes starter mission, reset, briefing, tab navigation, fractional crew and clearing inputs.
+- Visual verification is still pending because browser control was previously denied. No claim of complete operational readiness; unavailable datasets remain deferred.
