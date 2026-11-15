@@ -62,3 +62,7 @@ To check the same build locally:
 npm run build -- --base /Nasa/
 npm run preview -- --base /Nasa/
 ```
+
+## Contributing
+
+Issues and pull requests are welcome. Please run `npm test` and `npm run build` before opening a pull request.
